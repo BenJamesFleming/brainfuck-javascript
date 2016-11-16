@@ -138,7 +138,7 @@
          $(".cell").eq(pointer).html(cells[pointer]);
 
           if (--i && char_index<code_chars.length) myLoop(i);      //  decrement i and call myLoop again if i > 0
-       }, 75)
+       }, 5)
     })(10000);
   }
 
