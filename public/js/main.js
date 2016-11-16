@@ -23,9 +23,15 @@
   // valid_chars as str; String Of All The Vaild Brainfuck Characters
   var valid_chars="<>+-[],.";
 
+  // UI Variables
+  var input_elmt="#code_input";
+  var output_elmt="#output";
+  var run_btn="#run_btn";
+
   // Run Function
   // To Run The Code On The Users Request
   function runCode() {
+    $(output_elmt).html("");
     // Variables
     // char_index as int; Index Of The Current Charcater
     // pointer as int; Index Of The Current Cell
@@ -38,8 +44,7 @@
 
     // Get Brainfuck Code
     // And Get Only The Valid Characters
-    var code_raw = $("#code_input").val();
-    if (code_raw === undefined) { console.log("Code Not Found"); return; }
+    var code_raw = $(input_elmt).val();
     var code_chars =  code_raw.replace(new RegExp('[^' + valid_chars + ']', 'g'), '');
 
     // Run Through BrainFuck Code
@@ -48,6 +53,7 @@
       // Get Char Value
       // At The Char Index
       var char_val = code_chars.charAt(char_index);
+      console.log(char_val);
 
       // Switch Case For Each Characters Action
       switch (char_val) {
@@ -87,7 +93,7 @@
         // Rturn To The Last "[" Character In The Code
         case "]":
           if (cells[pointer]!=0) {char_index=loop_stack.pop();}
-          else {loop_stack.pop();}
+          else {char_index++;loop_stack.pop();}
           break;
 
         // Case For "," Character
@@ -107,6 +113,7 @@
         // Add To The Error Count
         default:
           error_count++;
+          console.log(char_val+" Is Not A Valid Character!");
 
       }
 
@@ -121,6 +128,9 @@
   // To Output To The Screen
   function output(value) {
     console.log("Output Value : "+value);
+
+    // Output Character To Screen
+    $(output_elmt).append(value);
   }
 
   // Input Function
@@ -130,7 +140,7 @@
   }
 
   $(document).ready(function () {
-    $("#run_btn").on("click", runCode);
+    $(run_btn).on("click", runCode);
   });
 
 })( jQuery );

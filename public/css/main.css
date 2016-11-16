@@ -1,5 +1,6 @@
 body {
   display: flex;
+  font-family: 'Roboto', sans-serif;
   justify-content: center;
 }
 
@@ -15,11 +16,19 @@ body {
   justify-content: center;
 }
 
-textarea {
-  width: 650px !important;
-  height: 300px !important;
+#code_input {
+  width: 650px;
+  height: 300px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  word-break: break-all;
 }
 
 button {
   width: 180px;
+}
+
+#output {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
 }
