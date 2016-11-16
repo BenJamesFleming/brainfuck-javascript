@@ -19,30 +19,35 @@
 // Main Function Block
 (function( $ ) {
 
-  // Variables
-  // pointer as int; Index Of The Current Cell
-  // cells as arr; Array Of All The Cells
-  // loop_stack as arr; Array Of All Current Loops
+  // Global Variables
   // valid_chars as str; String Of All The Vaild Brainfuck Characters
-  var pointer=0;
-  var cells=[0];
-  var loop_stack=[];
   var valid_chars="<>+-[],.";
 
   // Run Function
   // To Run The Code On The Users Request
   function runCode() {
-    console.log("Running Code");
+    // Variables
+    // char_index as int; Index Of The Current Charcater
+    // pointer as int; Index Of The Current Cell
+    // cells as arr; Array Of All The Cells
+    // loop_stack as arr; Array Of All Current Loops
+    var char_index=0;
+    var pointer=0;
+    var cells=[0];
+    var loop_stack=[];
+
     // Get Brainfuck Code
     // And Get Only The Valid Characters
-    var code_raw = $("#code_input").html();
+    var code_raw = $("#code_input").val();
+    if (code_raw === undefined) { console.log("Code Not Found"); return; }
     var code_chars =  code_raw.replace(new RegExp('[^' + valid_chars + ']', 'g'), '');
+
     // Run Through BrainFuck Code
     while (char_index<code_chars.length) {
 
       // Get Char Value
       // At The Char Index
-      var char_val = characters.charAt(char_index);
+      var char_val = code_chars.charAt(char_index);
 
       // Switch Case For Each Characters Action
       switch (char_val) {
@@ -105,7 +110,10 @@
 
       }
 
+      // If The Character Is Not ']'
+      // Continue To The Next Character
       if (char_val!="]") {char_index++;}
+
     }
   }
 
@@ -121,6 +129,8 @@
     return prompt("Enter User Input, Max 1 Character: ").charCodeAt(0);
   }
 
-  $("#run_btn").on("click", runCode());
+  $(document).ready(function () {
+    $("#run_btn").on("click", runCode);
+  });
 
 })( jQuery );
