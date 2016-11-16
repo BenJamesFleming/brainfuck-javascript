@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  max-width: 650px;
+}
+
+.input-group {
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea {
+  width: 650px !important;
+  height: 300px !important;
+}
+
+button {
+  width: 180px;
+}

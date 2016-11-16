@@ -1,14 +1,40 @@
 <!doctype HTML>
 <html>
 <head>
-  <title>Brain Fuck JS Interperter</title>
+  <title>BrainFuck JS Interperter</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="main.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/main.js"></script>
 </head>
 <body>
-  <textarea id="code_input">
-  >++++++++[>++++[>++>+++>+++>+++>+++>+>+++>+++>+++>+++>+++>+[<]>>-]>+>+>+>+>++>>->++>++>+>+[<]<-]>>.>---.>++++.>++++.>-.>.>-.>-.>++.>++++.>----.>+.</textarea>
-  <input id="run_btn" type="button" value="Run">
-  <div id="output"></div>
+
+  <div class="wrapper">
+
+    <div class="page-header">
+      <h1>BrainFuck JS Interperter <small><a href="http://benthe.ninja/">By Ben Fleming</a></small></h1>
+    </div>
+
+
+    <div class="input-group">
+      <textarea type="text" class="form-control" placeholder="Add Your Code Here" aria-describedby="basic-addon1" id="code_input">>++++++++[>++++[>++>+++>+++>+++>+++>+>+++>+++>+++>+++>+++>+[<]>>-]>+>+>+>+>++>>->++>++>+>+[<]<-]>>.>---.>++++.>++++.>-.>.>-.>-.>++.>++++.>----.>+.</textarea>
+    </div>
+
+
+    <div class="input-group">
+      <button class="btn btn-default" type="button" id="run_btn">Run Code</button>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Program Output</div>
+      <div class="panel-body" id="output"></div>
+    </div>
+
+  </div>
+
 </body>
 </html>
