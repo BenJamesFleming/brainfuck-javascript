@@ -31,7 +31,7 @@ body {
 .cell {
   min-width: 30px;
   height: 30px;
-  padding: 0; 
+  padding: 0;
 }
 
 .slider {
@@ -55,6 +55,16 @@ body {
 
 .highlight {
   background: yellow;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#delay_slider {
+  width: 180px;
 }
 
 #code_input {
