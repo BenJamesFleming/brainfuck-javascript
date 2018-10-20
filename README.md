@@ -1,4 +1,4 @@
 # brainfuck-javascript
-A BrainFuck Interputer Developed In Javascript
+A BrainFuck Interpreter Developed In Javascript
 
 **Work In Progress**

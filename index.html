@@ -1,0 +1,63 @@
+<!doctype HTML>
+<html>
+<head>
+  <title>BrainFuck JS Interpreter</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>BrainF**k Interpreter</h1>
+      <small>By Ben Fleming</small>
+    </header>
+
+    <main>
+      <div class="input-group code-input">
+        <textarea type="text" class="form-control" placeholder="Add Your Code Here" aria-describedby="basic-addon1" id="code_input">>++++++++[>++++[>++>+++>+++>+++>+++>+>+++>+++>+++>+++>+++>+[<]>>-]>+>+>+>+>++>>->++>++>+>+[<]<-]>>.>---.>++++.>++++.>-.>.>-.>-.>++.>++++.>----.>+.</textarea>
+        <div class="input-group options">
+          <input id="delay_slider" type="range" min="0" max="100">
+          <button class="btn btn-default" type="button" id="run_btn">Run Code</button>
+        </div>
+      </div>
+      <div class="btn-group cell-list" role="group"></div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Program Output</div>
+        <div class="panel-body output"></div>
+      </div>
+    </main>
+  </div>
+  
+  <script type="module" src="js/brainfuck.js"></script>
+  <script type="module">
+    import BrainFuck from './js/brainfuck.js'
+
+    const cellListEl = document.querySelector('.cell-list')
+
+    const codeInputEl = document.querySelector('.code-input > textarea')
+    const outputEl = document.querySelector('.output')
+    const delaySliderEl = document.querySelector('#delay_slider')
+
+    const bf = BrainFuck(codeInputEl.textContent)
+    ;(function update() {
+      const { done, value: v } = bf.next()
+      if (done) { return }
+
+      outputEl.textContent += v.output
+
+      v.cells.forEach((value, index) => (
+        cellListEl.childElementCount < index + 1
+        ? cellListEl.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-default cell">${value}</button>`)
+        : cellListEl.childNodes[index].innerText = value
+      ))
+
+      setTimeout(update, delaySliderEl.value)
+    })()
+  </script>
+</body>
+</html>
