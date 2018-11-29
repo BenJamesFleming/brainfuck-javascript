@@ -22,8 +22,10 @@
         <textarea type="text" class="form-control" placeholder="Add Your Code Here" aria-describedby="basic-addon1" id="code_input">>++++++++[>++++[>++>+++>+++>+++>+++>+>+++>+++>+++>+++>+++>+[<]>>-]>+>+>+>+>++>>->++>++>+>+[<]<-]>>.>---.>++++.>++++.>-.>.>-.>-.>++.>++++.>----.>+.</textarea>
         <div class="input-group options">
           <input id="delay_slider" type="range" min="0" max="100">
-          <button class="btn btn-default" type="button" id="run_btn">Visualize</button>
-          <button class="btn btn-default" type="button" id="execute_btn">Execute</button>
+          <div class="input-group actions">
+            <button class="btn btn-default" type="button" id="run_btn">Visualize</button>
+            <button class="btn btn-default" type="button" id="execute_btn">Execute</button>
+          </div>
         </div>
       </div>
       <div class="btn-group cell-list" role="group"></div>
@@ -62,22 +64,23 @@
     function reset () {
       clearTimeout(timeout)
 
-      pnlOutput.innerHTML = '';
-      pnlCellList.innerHTML = '';
+      pnlOutput.innerHTML = ''
+      pnlCellList.innerHTML = ''
     }
 
     function execute (button, useDelay) {
       if (button.disabled) return
       button.disabled = true
 
-      let bf = BrainFuck(tbxCodeInput.textContent)
+      let bf = BrainFuck(tbxCodeInput.value)
 
       ;(function loop() {
         let { done, value: v } = bf.next()
         if (done) { return }
 
         pnlOutput.textContent += v.output
-        pbxCellPointer.style.marginLeft = `${((50 + 4) * v.pointer)+5}px`
+        pbxCellPointer.style.marginLeft = `${(52 * v.pointer)}px`
+
         v.cells.forEach((value, index) => (
           pnlCellList.childElementCount < index + 1
           ? pnlCellList.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-default cell">${value}</button>`)

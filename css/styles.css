@@ -1,9 +1,41 @@
+/* Input Group Styles */
+.input-group.code-input,
+.input-group.options {
+  width: 100%;
+}
+.input-group.options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Input Group Code Input */
+.input-group.code-input > textarea {
+  height: 250px;
+}
+
+/* Input Group Action Styles */
+.input-group.actions { width: auto; }
+.input-group.actions > button {
+  margin: 5px 0px 5px 5px;
+}
+
+/* Cell List Styles */
+.cell-list { 
+  overflow-x: scroll;
+  max-width: 100%;
+}
+.cell-list::-webkit-scrollbar { display: none; }
 .cell-list > button {
-  width: 50px;
+  min-width: 50px;
   margin: 2px;
   padding: 3px;
 }
 
+/* Cell Pointer Styles */
+.cell-pointer::-webkit-scrollbar { display: none; }
 .cell-pointer {
-  width: 100%;
+  overflow-x: scroll;
+  max-width: 100%;
 }
