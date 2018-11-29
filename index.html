@@ -56,7 +56,7 @@
         : cellListEl.childNodes[index].innerText = value
       ))
 
-      setTimeout(update, delaySliderEl.value)
+      setTimeout(update, Math.max(100 - delaySliderEl.value, 10))
     })()
   </script>
 </body>
