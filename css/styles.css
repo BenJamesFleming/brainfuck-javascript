@@ -26,18 +26,24 @@ header {
 /* Input Group Action Styles */
 .input-group.actions { width: auto; }
 .input-group.actions > button {
-  margin: 5px 0px 5px 5px;
+  margin: 10px 0px 0px 5px;
 }
 
 /* Cell List Styles */
 .cell-list { 
   overflow-x: scroll;
   max-width: 100%;
+  width: 100%;
+  height: 50px;
+  box-shadow: 1px 1px 10px rgba(255,255,255,0.3);
+  border-radius: 3px;
+  margin: 10px 0;
 }
 .cell-list::-webkit-scrollbar { display: none; }
 .cell-list > button {
   min-width: 50px;
-  margin: 2px;
+  height: 100%;
+  margin: 0 2px;
   padding: 3px;
 }
 
