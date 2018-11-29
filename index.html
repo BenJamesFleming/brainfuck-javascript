@@ -27,6 +27,7 @@
         </div>
       </div>
       <div class="btn-group cell-list" role="group"></div>
+      <div class="cell-pointer"><i class="material-icons">keyboard_arrow_up</i></div>
       <div class="panel panel-default">
         <div class="panel-heading">Program Output</div>
         <div class="panel-body output"></div>
@@ -39,6 +40,7 @@
     import BrainFuck from './js/brainfuck.js'
 
     const pnlCellList       = document.querySelector('.cell-list')
+    const pbxCellPointer    = document.querySelector('.cell-pointer > i')
 
     const tbxCodeInput      = document.querySelector('.code-input > textarea')
     const pnlOutput         = document.querySelector('.output')
@@ -46,6 +48,8 @@
 
     const btnVisualizeCode  = document.querySelector('#run_btn')
     const btnExecuteCode    = document.querySelector('#execute_btn')
+
+    let timeout = null
 
     btnVisualizeCode.addEventListener(
       'click', ({ target }) => { reset(); execute(target, true) }
@@ -56,6 +60,8 @@
     )
 
     function reset () {
+      clearTimeout(timeout)
+
       pnlOutput.innerHTML = '';
       pnlCellList.innerHTML = '';
     }
@@ -71,7 +77,7 @@
         if (done) { return }
 
         pnlOutput.textContent += v.output
-
+        pbxCellPointer.style.marginLeft = `${((50 + 4) * v.pointer)+5}px`
         v.cells.forEach((value, index) => (
           pnlCellList.childElementCount < index + 1
           ? pnlCellList.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-default cell">${value}</button>`)
@@ -79,7 +85,7 @@
         ))
         
         if (!useDelay) { return loop() }
-        setTimeout(loop, Math.max(100 - rngVisualizeSpeed.value, 10))
+        timeout = setTimeout(loop, Math.max(100 - rngVisualizeSpeed.value, 10))
       })()
 
       button.disabled = false

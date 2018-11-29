@@ -1,0 +1,9 @@
+.cell-list > button {
+  width: 50px;
+  margin: 2px;
+  padding: 3px;
+}
+
+.cell-pointer {
+  width: 100%;
+}
