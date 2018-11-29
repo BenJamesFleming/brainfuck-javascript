@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html>
 <head>
-  <title>BrainFuck JS Interpreter</title>
+  <title>BrainF**k JS Interpreter</title>
 
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,7 +22,8 @@
         <textarea type="text" class="form-control" placeholder="Add Your Code Here" aria-describedby="basic-addon1" id="code_input">>++++++++[>++++[>++>+++>+++>+++>+++>+>+++>+++>+++>+++>+++>+[<]>>-]>+>+>+>+>++>>->++>++>+>+[<]<-]>>.>---.>++++.>++++.>-.>.>-.>-.>++.>++++.>----.>+.</textarea>
         <div class="input-group options">
           <input id="delay_slider" type="range" min="0" max="100">
-          <button class="btn btn-default" type="button" id="run_btn">Run Code</button>
+          <button class="btn btn-default" type="button" id="run_btn">Visualize</button>
+          <button class="btn btn-default" type="button" id="execute_btn">Execute</button>
         </div>
       </div>
       <div class="btn-group cell-list" role="group"></div>
@@ -37,27 +38,52 @@
   <script type="module">
     import BrainFuck from './js/brainfuck.js'
 
-    const cellListEl = document.querySelector('.cell-list')
+    const pnlCellList       = document.querySelector('.cell-list')
 
-    const codeInputEl = document.querySelector('.code-input > textarea')
-    const outputEl = document.querySelector('.output')
-    const delaySliderEl = document.querySelector('#delay_slider')
+    const tbxCodeInput      = document.querySelector('.code-input > textarea')
+    const pnlOutput         = document.querySelector('.output')
+    const rngVisualizeSpeed = document.querySelector('#delay_slider')
 
-    const bf = BrainFuck(codeInputEl.textContent)
-    ;(function update() {
-      const { done, value: v } = bf.next()
-      if (done) { return }
+    const btnVisualizeCode  = document.querySelector('#run_btn')
+    const btnExecuteCode    = document.querySelector('#execute_btn')
 
-      outputEl.textContent += v.output
+    btnVisualizeCode.addEventListener(
+      'click', ({ target }) => { reset(); execute(target, true) }
+    )
 
-      v.cells.forEach((value, index) => (
-        cellListEl.childElementCount < index + 1
-        ? cellListEl.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-default cell">${value}</button>`)
-        : cellListEl.childNodes[index].innerText = value
-      ))
+    btnExecuteCode.addEventListener(
+      'click', ({ target }) => { reset(); execute(target, false) }
+    )
 
-      setTimeout(update, Math.max(100 - delaySliderEl.value, 10))
-    })()
+    function reset () {
+      pnlOutput.innerHTML = '';
+      pnlCellList.innerHTML = '';
+    }
+
+    function execute (button, useDelay) {
+      if (button.disabled) return
+      button.disabled = true
+
+      let bf = BrainFuck(tbxCodeInput.textContent)
+
+      ;(function loop() {
+        let { done, value: v } = bf.next()
+        if (done) { return }
+
+        pnlOutput.textContent += v.output
+
+        v.cells.forEach((value, index) => (
+          pnlCellList.childElementCount < index + 1
+          ? pnlCellList.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-default cell">${value}</button>`)
+          : pnlCellList.childNodes[index].innerText = value
+        ))
+        
+        if (!useDelay) { return loop() }
+        setTimeout(loop, Math.max(100 - rngVisualizeSpeed.value, 10))
+      })()
+
+      button.disabled = false
+    }
   </script>
 </body>
 </html>
