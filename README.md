@@ -1,4 +1,6 @@
 # brainfuck-javascript
 A BrainFuck Interpreter Developed In Javascript
 
-**Work In Progress**
+TODO
+* style the page
+* test compiler
